@@ -1,0 +1,50 @@
+﻿@page "/post/{Slug}"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@using System.Text.Json.Serialization
+@using Models
+
+
+@if (postDetails != null && postDetails.post == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <section class="text-gray-700 body-font">
+        <div class="container mx-auto flex px-5 pb-24 items-center justify-center flex-col">
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">@postDetails.post.Title</h1>
+            <img class=" mb-10 object-cover object-center rounded" alt="hero" src="@postDetails.post.Metadata.hero.imgix_url">
+            <div class=" w-full">
+                <div class="mb-8 leading-relaxed">@((MarkupString)postDetails.post.Content)</div>
+            </div>
+            <div class="p-2 w-full">
+                <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" @onclick="NavigateToIndexComponent">Back</button>
+            </div>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter] public string Slug { get; set; }
+
+    private PostDetail postDetails = new PostDetail();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var url = $"https://api.cosmicjs.com/v1/03ed2a30-a597-11e9-8965-1ff07c75b41d/object/{Slug}?pretty=true&hide_metafields=true";
+        postDetails = await Http.GetFromJsonAsync<PostDetail>(url.Replace("{Slug}", Slug));
+        postDetails.post.Metadata.hero.imgix_url = postDetails.post.Metadata.hero.imgix_url + "?w=720&h=600";
+    }
+
+    private void NavigateToIndexComponent()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
+    public class PostDetail
+    {
+        [JsonPropertyName("object")]
+        public Post post { get; set; }
+    }
+}
