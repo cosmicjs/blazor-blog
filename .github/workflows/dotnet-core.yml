@@ -1,0 +1,34 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Publish Blazor webassembly using dotnet 
+      #create Blazor WebAssembly dist output folder in the project directory
+      run: dotnet publish -c Release --no-build -o publishoutput
+    - name: Publish generated Blazor webassembly to Netlify
+      uses: netlify/actions/cli@master #uses Netlify Cli actions
+      env: # These are the environment variables added in GitHub Secrets for this repo
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      with:
+          args: deploy --dir=publishoutput/wwwroot --prod #push this folder to Netlify
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]' 
