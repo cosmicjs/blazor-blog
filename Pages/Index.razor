@@ -16,24 +16,14 @@ else
             <div class="flex flex-wrap -m-4">
                 @foreach (var post in allPosts.objects)
                 {
-                    <div class="p-4 md:w-1/3">
+                    <a class="p-4 md:w-1/3" href="@($"post/{post.Slug}")">
                         <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
                             <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="@post.Metadata.hero.imgix_url?w=720&h=400" alt="blog">
                             <div class="p-6">
                                 <h1 class="title-font text-lg font-medium text-gray-900 mb-3">@post.Title</h1>
-                                <div class="flex items-center flex-wrap ">
-                                    <NavLink href="@($"post/{post.Slug}")">
-                                        <a class="text-indigo-500 inline-flex items-center">
-                                            Read More
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                            </svg>
-                                        </a>
-                                    </NavLink>
-                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 }
             </div>
         </div>

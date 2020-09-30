@@ -18,10 +18,17 @@ namespace BlazorCosmicBlog.Models
     public class PostMetadata
     {
         public Hero hero { get; set; }
+        public Author author { get; set; }
     }
     public class Hero
     {
         public string url { get; set; }
         public string imgix_url { get; set; }
+    }
+    public class Author
+    {
+        public string slug { get; set; }
+        public string status { get; set; }
+        public string title { get; set; }
     }
 }
