@@ -7,7 +7,7 @@
 
 ![blazor-cosmic-blog](https://dev-to-uploads.s3.amazonaws.com/i/8fqwgzg3yvh9p8pw8u4d.PNG "The post detail page of the blazor cosmic blog")
 
-![blazor-cosmic-blog](https://dev-to-uploads.s3.amazonaws.com/i/np4cxtdeqnx3qw6t4lsd.PNG "The about page of the blazor cosmic blog")
+![blazor-cosmic-blog](https://dev-to-uploads.s3.amazonaws.com/i/tf6n6s5ygr1sytiue77x.PNG "The about page of the blazor cosmic blog")
 
 > This repo contains an example blog application that is built with [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor), [Cosmic](https://www.cosmicjs.com) and [Tailwind CSS](https://tailwindcss.com/).
 
