@@ -33,4 +33,4 @@ In wwwroot/appsettings.json file,
 ``` bash
 dotnet run
 ```
-Open https://localhost:44346/.
+Open https://localhost:5000/.
