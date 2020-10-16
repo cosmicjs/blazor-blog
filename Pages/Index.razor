@@ -37,8 +37,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         string cosmic_bucket_slug = Configuration["AppSettings:COSMIC_BUCKET_SLUG"];
-        var url = "https://api.cosmicjs.com/v1/{COSMIC_BUCKET_SLUG}/objects?pretty=true&hide_metafields=true&type=posts";
-        allPosts = await Http.GetFromJsonAsync<AllPost>(url.Replace("{COSMIC_BUCKET_SLUG}", cosmic_bucket_slug));
+        string cosmic_read_key = Configuration["AppSettings:COSMIC_READ_KEY"];
+        var url = "https://api.cosmicjs.com/v1/{COSMIC_BUCKET_SLUG}/objects?pretty=true&hide_metafields=true&type=posts&read_key={COSMIC_READ_KEY}";
+        url = url.Replace("{COSMIC_BUCKET_SLUG}", cosmic_bucket_slug);
+        url = url.Replace("{COSMIC_READ_KEY}", cosmic_read_key);
+        allPosts = await Http.GetFromJsonAsync<AllPost>(url);
     }
     public class AllPost
     {
