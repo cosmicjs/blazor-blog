@@ -1,9 +1,10 @@
 ﻿@page "/post/{Slug}"
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@using Microsoft.Extensions.Configuration;
 @using System.Text.Json.Serialization
 @using Models
-
+@inject IConfiguration Configuration
 
 @if (postDetails != null && postDetails.post == null)
 {
@@ -33,7 +34,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var url = $"https://api.cosmicjs.com/v1/03ed2a30-a597-11e9-8965-1ff07c75b41d/object/{Slug}?pretty=true&hide_metafields=true";
+        string cosmic_bucket_slug = Configuration["AppSettings:COSMIC_BUCKET_SLUG"];
+        string cosmic_read_key = Configuration["AppSettings:COSMIC_READ_KEY"];
+        var url = $"https://api.cosmicjs.com/v1/{cosmic_bucket_slug}/object/{Slug}?pretty=true&hide_metafields=true&read_key={cosmic_read_key}";
+        url = url.Replace("{COSMIC_BUCKET_SLUG}", cosmic_bucket_slug);
+        url = url.Replace("{COSMIC_READ_KEY}", cosmic_read_key);
         postDetails = await Http.GetFromJsonAsync<PostDetail>(url.Replace("{Slug}", Slug));
         postDetails.post.Metadata.hero.imgix_url = postDetails.post.Metadata.hero.imgix_url + "?w=720&h=600";
     }

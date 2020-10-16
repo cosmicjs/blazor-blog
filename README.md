@@ -20,13 +20,14 @@
 
 ## Getting Started
 ``` bash
-git clone https://github.com/sumitkharche/BlazorCosmicBlog.git
-cd BlazorCosmicBlog
+git clone https://github.com/cosmicjs/blazor-blog.git
+cd blazor-blog
 ```
 
 ### Keys
 In wwwroot/appsettings.json file,
 - update your Cosmic bucket slug
+- update your Cosmic bucket read key
 
 ### Run
 ``` bash
