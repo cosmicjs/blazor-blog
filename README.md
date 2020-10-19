@@ -13,6 +13,9 @@
 
 ### [View Demo](https://blazor-cosmic-blog.netlify.app/)
 
+### How-To Article
+Read the how-to guide: [How to Build a Blazing-Fast Blazor Blog with Cosmic](https://www.cosmicjs.com/articles/build-a-blog-application-using-blazor-and-cosmic).
+
 ## Prerequisites
 - Install the latest [.NET Core SDK](https://dotnet.microsoft.com/download)
 - Install the Blazor project templates
