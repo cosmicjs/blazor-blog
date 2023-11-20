@@ -36,7 +36,9 @@ else
     {
         string cosmic_bucket_slug = Configuration["AppSettings:COSMIC_BUCKET_SLUG"];
         string cosmic_read_key = Configuration["AppSettings:COSMIC_READ_KEY"];
-        var url = $"https://api.cosmicjs.com/v1/{cosmic_bucket_slug}/object/{Slug}?pretty=true&hide_metafields=true&read_key={cosmic_read_key}";
+        string queryParam = $"{{\"type\":\"blogs\",\"slug\":\"{Slug}\"}}";
+        string encodedQueryParam = HttpUtility.UrlEncode(queryParam);
+        var url = $"https://api.cosmicjs.com/v3/buckets/{cosmic_bucket_slug}/objects/?query={encodedQueryParam}&pretty=true&hide_metafields=true&read_key={cosmic_read_key}";
         url = url.Replace("{COSMIC_BUCKET_SLUG}", cosmic_bucket_slug);
         url = url.Replace("{COSMIC_READ_KEY}", cosmic_read_key);
         postDetails = await Http.GetFromJsonAsync<PostDetail>(url.Replace("{Slug}", Slug));
